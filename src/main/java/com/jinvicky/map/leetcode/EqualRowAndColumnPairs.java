@@ -1,21 +1,24 @@
 package com.jinvicky.map.leetcode;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * LeetCode 1945. Sum of Digits of String After Convert
- *
+ * <p>
  * [소요시간]
  * 2시간 14분 걸려서 정답. 성능은 제출자중 보통 수준
- *
+ * <p>
  * [헤맴]
  * 맨 처음에 정말 4중 for문까지 갔었다. 문제는 2422로 이루어진 페어가 2개인데 중복이 사라져서 1이 되는 이슈를 해결못했다.
  * 그리고 discussion 보고 힌트 얻어서 해결
- *
+ * <p>
  * [오래걸린 부분]
  * * 1과 11이 들어오면 111이 되는데 이를 구분할 수가 없음 => 중복만 식별하면 되므로 그냥 값 뒤에 '-' 붙여서 해결
+ * * wMap과 hMap을 서로 곱해야 하는데 Math.max()로 했다가 실패 => 직접 그림을 그려서 두 작대기의 교차점을 계산해서 이슈를 수정함.
  *
+ * <p>
  * [걍..해]
  * 헷갈리는 부분은 그냥 별도 메서드로 빼버렸다. calcWidth(), calcHeight()
  */
@@ -51,10 +54,34 @@ public class EqualRowAndColumnPairs {
         for (Map.Entry<String, Integer> entry : widthMap.entrySet()) {
             if (heightMap.containsKey(entry.getKey())) {
                 int hValue = heightMap.get(entry.getKey());
-                ans += (hValue  * entry.getValue());
+                ans += (hValue * entry.getValue());
             }
         }
         return ans;
+    }
+
+    /**
+     * 더 성능이 높은 정답
+     */
+    public int equalPairsAnswer(int[][] grid) {
+        HashMap<Integer, int[]> cols = new HashMap<>();
+        for (int i = 0; i < grid.length; i++) {
+            int[] currCol = new int[grid.length];
+            for (int j = 0; j < grid.length; j++) {
+                currCol[j] = grid[j][i];
+            }
+            cols.put(i, currCol);
+        }
+
+        int count = 0;
+        for (int i = 0; i < grid.length; i++) {
+            for (Integer col : cols.keySet()) {
+                if (Arrays.equals(grid[i], cols.get(col))) {
+                    count++;
+                }
+            }
+        }
+        return count;
     }
 
     public static void main(String[] args) {
