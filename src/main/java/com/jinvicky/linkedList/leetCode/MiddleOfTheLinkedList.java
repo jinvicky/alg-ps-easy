@@ -13,10 +13,7 @@ package com.jinvicky.linkedList.leetCode;
  * <p>
  * [어려웠던점]
  * - 짝수여서 중간 노드의 개수가 2개라면 오른쪽을 택해야 한다는 부분이 계산이 머리에 잘 안 그려졌다.
- * <p>
- * 0 1 2 3 4 5 (fast)
- * 0 0 1 1 2 2 (slow)
- * <p>
+
  * - 0부터 시작하기 때문에 flag가 짝수일 경우 홀수이며, 이때 slow를 slow.next로 갱신한다.
  * - fast는 항상 fast.next로 갱신한다.
  */
