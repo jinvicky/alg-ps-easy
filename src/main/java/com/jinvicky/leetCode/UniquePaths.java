@@ -1,4 +1,4 @@
-package dp.leetCode;
+package com.jinvicky.leetCode;
 
 
 /**
