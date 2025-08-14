@@ -39,6 +39,6 @@ class Solution {
             row.add(1); // 끝을 1로 고정한다.
             answer.add(row);
         }
-        return answer.get(numRows);
+        return answer.get(numRows); // rowIdx+1 배열 만들고 rowIdx번째 반환하기 (이것또한 암기국룰임)
     }
 }
